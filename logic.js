@@ -10,25 +10,25 @@ function randomWord(gameWords) {
 }
 
 function isCorrectGuess(word, letter) {
-    if (word.includes(letter) === true) {
+    if (word.includes(letter.toLowerCase()) === true || word.includes(letter.toUpperCase()) === true) {
         return true
     }
-    else if (word.includes(letter) === false) {
+    else {
         return false
     }
 }
 
 function getBlanks(word) {
-    var blanks = [];
+    var currentArray = [];
     for(i = 0; i < word.length; i++) {
         if (word[i] === " ") {
-            blanks[i] = " ";
+            currentArray[i] = " ";
         }
         else {
-            blanks[i] = "_";
+            currentArray[i] = "_";
         }
     }
-    return blanks
+    return currentArray
 }
 
 function fillBlanks(word, currentArray, letter) {
@@ -43,3 +43,53 @@ function fillBlanks(word, currentArray, letter) {
     return currentArray   
 }
 
+function setupRound(word) {
+    var round = {
+        word: word,
+        guessesLeft: 9,
+        wrongGuesses: [],
+        puzzleState: getBlanks(word)
+    }
+    return round
+}
+
+function updateRound(round, letter) {
+    var round = {
+        word: round.word,
+        guessesLeft: round.guessesLeft,
+        wrongGuesses: round.wrongGuesses,
+        puzzleState: fillBlanks(round.word, round.puzzleState, letter)
+    }
+    if (isCorrectGuess(round.word, letter) === false && round.wrongGuesses.includes(letter.toLowerCase()) === false && round.wrongGuesses.includes(letter.toUpperCase()) === false) {
+        round.wrongGuesses.push(letter);
+        round.guessesLeft -= 1;
+    }
+    return round
+}
+
+function hasWon(puzzleState) {
+    for (i = 0; i < puzzleState.length; i++) {
+        if (puzzleState[i] === "_") {
+            return false
+        }
+    }
+    return true
+}
+
+function hasLost(guessesLeft) {
+    if (guessesLeft === 0) {
+        return true
+    }
+    else {
+        return false
+    }
+}
+
+function isEndOfRound(round) {
+    if (hasLost(round.guessesLeft) === true || hasWon(round.puzzleState) === true) {
+        return true
+    }
+    else {
+        return false
+    }
+}
