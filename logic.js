@@ -30,3 +30,16 @@ function getBlanks(word) {
     }
     return blanks
 }
+
+function fillBlanks(word, currentArray, letter) {
+    for (i = 0; i < word.length; i++) {
+        if (letter.toLowerCase() === word[i]) {
+            currentArray[i] = word[i];
+        }
+        else if (letter.toUpperCase() === word[i]) {
+            currentArray[i] = word[i]
+        }
+    } 
+    return currentArray   
+}
+
