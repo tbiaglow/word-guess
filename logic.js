@@ -18,3 +18,15 @@ function isCorrectGuess(word, letter) {
     }
 }
 
+function getBlanks(word) {
+    var blanks = [];
+    for(i = 0; i < word.length; i++) {
+        if (word[i] === " ") {
+            blanks[i] = " ";
+        }
+        else {
+            blanks[i] = "_";
+        }
+    }
+    return blanks
+}
