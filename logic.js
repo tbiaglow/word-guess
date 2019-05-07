@@ -93,3 +93,27 @@ function isEndOfRound(round) {
         return false
     }
 }
+
+var wins;
+var losses;
+
+function setupGame(words, wins, losses) {
+    var game = {
+        words: gameWords,
+        wins: wins,
+        losses: losses,
+        round: setupRound(randomWord(gameWords))
+    }
+    return game
+}
+
+function startNewRound(game) {
+    if (hasWon(puzzleState) === true) {
+        game.wins += 1;
+        alert("You win!")
+    }
+    else if (hasLost(puzzleState) === true) {
+        game.losses += 1;
+        alert("The word was " + setupRound.word)
+    }
+}
