@@ -99,7 +99,7 @@ var losses;
 
 function setupGame(words, wins, losses) {
     var game = {
-        words: gameWords,
+        words: words,
         wins: wins,
         losses: losses,
         round: setupRound(randomWord(gameWords))
@@ -116,4 +116,7 @@ function startNewRound(game) {
         game.losses += 1;
         alert("The word was " + setupRound.word)
     }
+    game.round = setupRound(randomWord(gameWords));
 }
+
+var myGame = setupGame(gameWords, 0, 0)
