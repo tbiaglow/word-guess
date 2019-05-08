@@ -94,8 +94,6 @@ function isEndOfRound(round) {
     }
 }
 
-var wins;
-var losses;
 
 function setupGame(words, wins, losses) {
     var game = {
@@ -108,15 +106,16 @@ function setupGame(words, wins, losses) {
 }
 
 function startNewRound(game) {
-    if (hasWon(puzzleState) === true) {
+    if (hasWon(game.round.puzzleState) === true) {
         game.wins += 1;
         alert("You win!")
     }
-    else if (hasLost(puzzleState) === true) {
+    else if (hasLost(game.round.guessesLeft) === true) {
         game.losses += 1;
-        alert("The word was " + setupRound.word)
+        alert("The word was " + game.round.word)
     }
     game.round = setupRound(randomWord(gameWords));
+    return game
 }
 
-var myGame = setupGame(gameWords, 0, 0)
+var myGame = setupGame(gameWords, 0, 0);
