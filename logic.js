@@ -50,6 +50,7 @@ function setupRound(word) {
         wrongGuesses: [],
         puzzleState: getBlanks(word)
     }
+    
     return round
 }
 
@@ -61,8 +62,15 @@ function updateRound(round, letter) {
         puzzleState: fillBlanks(round.word, round.puzzleState, letter)
     }
     if (isCorrectGuess(round.word, letter) === false && round.wrongGuesses.includes(letter.toLowerCase()) === false && round.wrongGuesses.includes(letter.toUpperCase()) === false) {
+        myGame.round.guessesLeft -= 1;
         round.wrongGuesses.push(letter);
-        round.guessesLeft -= 1;
+
+    }
+    document.getElementById("puzzle-state").innerHTML = myGame.round.puzzleState;
+    document.getElementById("wrong-guesses").innerHTML = "Wrong Guesses: " + myGame.round.wrongGuesses;
+    document.getElementById("guesses-left").innerHTML = "Guesses Left: " + myGame.round.guessesLeft;
+    if (isEndOfRound(round)) {
+        startNewRound(myGame)
     }
     return round
 }
@@ -108,11 +116,19 @@ function setupGame(words, wins, losses) {
 function startNewRound(game) {
     if (hasWon(game.round.puzzleState) === true) {
         game.wins += 1;
-        alert("You win!")
+        document.getElementById("puzzle-state").innerHTML = myGame.round.puzzleState;
+        document.getElementById("wrong-guesses").innerHTML = "Wrong Guesses: " + myGame.round.wrongGuesses;
+        document.getElementById("guesses-left").innerHTML = "Guesses Left: " + myGame.round.guessesLeft;
+        // alert("You win! The word was " + game.round.word)
+        document.getElementById("win-counter").innerHTML = "Wins: " + myGame.wins;
     }
     else if (hasLost(game.round.guessesLeft) === true) {
         game.losses += 1;
-        alert("The word was " + game.round.word)
+        document.getElementById("puzzle-state").innerHTML = myGame.round.puzzleState;
+        document.getElementById("wrong-guesses").innerHTML = "Wrong Guesses: " + myGame.round.wrongGuesses;
+        document.getElementById("guesses-left").innerHTML = "Guesses Left: " + myGame.round.guessesLeft;
+        // alert("The word was " + game.round.word)
+        document.getElementById("loss-counter").innerHTML = "Losses: " + myGame.losses;
     }
     game.round = setupRound(randomWord(gameWords));
     return game

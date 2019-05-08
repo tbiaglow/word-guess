@@ -11,10 +11,11 @@
 <body>
     <h1>Word Guess Game! Name the "Cobra Kai" Character!</h1>
     <div id = "puzzle-state"></div>
-    <div id = "wrong-guesses">Wrong Guesses:</div>
+    <div id = "wrong-guesses">Wrong Guesses: </div>
     <div id = "guesses-left">Guesses Left: </div>
     <div id = "win-counter">Wins: </div>
     <div id = "loss-counter">Losses: </div>
+    <input type="text" onkeyup="updateRound(myGame.round, event.key)">
     <script>
         document.getElementById("puzzle-state").innerHTML = myGame.round.puzzleState;
         document.getElementById("wrong-guesses").innerHTML = "Wrong Guesses: " + myGame.round.wrongGuesses;
