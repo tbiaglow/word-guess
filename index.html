@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Word Guess!</title>
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <script type="text/javascript" src="logic.js"></script>
+</head>
+<body>
+    <h1>Word Guess Game! Name the "Cobra Kai" Character!</h1>
+    <div id = "puzzle-state"></div>
+    <div id = "wrong-guesses">Wrong Guesses:</div>
+    <div id = "guesses-left">Guesses Left: </div>
+    <div id = "win-counter">Wins: </div>
+    <div id = "loss-counter">Losses: </div>
+    <script>
+        document.getElementById("puzzle-state").innerHTML = myGame.round.puzzleState;
+        document.getElementById("wrong-guesses").innerHTML = "Wrong Guesses: " + myGame.round.wrongGuesses;
+        document.getElementById("guesses-left").innerHTML = "Guesses Left: " + myGame.round.guessesLeft;
+        document.getElementById("win-counter").innerHTML = "Wins: " + myGame.wins;
+        document.getElementById("loss-counter").innerHTML = "Losses: " + myGame.losses;
+    </script>
+</body>
+</html>
